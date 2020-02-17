@@ -1,0 +1,264 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="DefaultAdmin.aspx.cs" Inherits="BookCar2.Admin.DefaultAdmin" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%@ Register assembly="CollectionPager" namespace="SiteUtils" tagprefix="cc1" %>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style2 {
+            width: 14px;
+        }
+        .auto-style3 {
+            width: 131px;
+          
+        }
+        .textBox{
+            border-radius:4px;
+        }
+        .auto-style4 {
+            width: 14px;
+            height: 67px;
+        }
+        .auto-style5 {
+            height: 67px;
+        }
+        .tdName {
+            width: 50px;
+            height: 30px;
+        }
+   
+        .tdDescription {
+            width: 48px;
+            height: 30px;
+        }    
+        .tdCarCategoryID {
+            width: 14px;
+            height: 30px;
+        }
+        .search {
+            width: 35px;
+            height: 30px;
+        }
+        .tdDTG{
+            width:90px;
+            height: 30px;
+        }
+        .dtBy {
+            width:50px;
+            height: 30px;
+        }
+        .paging{
+            padding-left: 45%;
+            padding-top: 16px;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $("#<%=btnInsert.ClientID%>").click(function () {
+                if ($("#<%=txtName.ClientID%>") == "") {
+                    alert("Chưa nhập tên danh mục");
+                } else {
+                    alert("Thêm thành công");
+
+                }
+            });
+
+        });
+    </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <table class="auto-style1">
+        <tr>
+            <td class="auto-style2"></td>
+            <td class="auto-style3">
+                &nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style4"></td>
+            <td colspan="5" class="auto-style5">
+                <asp:Label ID="Label2" runat="server" Font-Names="Arial" Font-Size="X-Large" ForeColor="Red" Text="Thêm Danh Mục Xe"></asp:Label>
+            </td>
+            <td class="auto-style5">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3">
+               
+                <asp:Label ID="lblName" runat="server" Text="Tên danh mục" Font-Bold="True" Font-Size="Medium"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtName" CssClass="textBox" runat="server" Width="218px" Height="23px"></asp:TextBox>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3">
+                <asp:Label ID="lblDes" runat="server" Text="Mô tả" Font-Bold="True" Font-Size="Medium"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtDes" CssClass="textBox" runat="server" Height="52px" TextMode="MultiLine" Width="370px"></asp:TextBox>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td colspan="2">
+                <asp:Button ID="btnInsert" runat="server" BackColor="#FFFF66" Font-Bold="True" Font-Size="Large" ForeColor="#990000" Height="30px" Text="Thêm" Width="101px" OnClick="btnInsert_Click" />
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td colspan="4">               
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td colspan="2">
+                <asp:Label ID="Label11" runat="server" Font-Names="Arial" Font-Size="X-Large" ForeColor="Red" Text="List Danh Mục Xe"></asp:Label>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td colspan="4">
+                <div class="table-header" style="width:100%">
+                    <table style="width:100%">
+                        <tr>
+                            <td class="search" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                <strong>
+                                <asp:Label ID="Label1" runat="server" Text="Xóa"></asp:Label></strong></td>
+                            <td class="search" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                <strong>
+                                <asp:Label ID="Label3" runat="server" Text="Sửa"></asp:Label></strong></td>
+                            <td class="tdCarCategoryID" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                <strong>
+                                <asp:Label ID="Label4" runat="server" Text="Mã"></asp:Label></strong></td>
+                            <td class="tdName" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                <strong>
+                                <asp:Label ID="Label5" runat="server" Text="Tên"></asp:Label></strong></td>
+                            <td class="tdDescription" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                <strong>
+                                <asp:Label ID="Label6" runat="server" Text="Mô tả"></asp:Label></strong></td>
+                            <td class="dtBy" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                <strong>
+                                <asp:Label ID="Label7" runat="server" Text="Tạo bởi"></asp:Label></strong></td>
+                            <td class="tdDTG" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                <strong>
+                                <asp:Label ID="Label8" runat="server" Text="Thời gian tạo"></asp:Label></strong></td>
+                            <td class="dtBy" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                <strong>
+                                <asp:Label ID="Label9" runat="server" Text="Cập nhật bởi"></asp:Label></strong></td>
+                             <td class="tdDTG" style="border-style: none none solid none; border-width: thin; border-color: #FF0000; border-spacing: 0px; border-collapse: collapse;">
+                                 <strong>
+                                <asp:Label ID="Label10" runat="server" Text="Thời gian cập nhật"></asp:Label></strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table">
+                <asp:DataList ID="DLListCar" runat="server" Width="100%" OnItemCommand="DLListCar_ItemCommand">
+                    <ItemTemplate>
+                        <table class="auto-style1" style="                                border-bottom-style: solid;
+                                border-width: thin;
+                                border-color: #FF0000
+                        ">
+                            <tr>
+                                <td class="search">
+                                    <asp:ImageButton ID="btnXoa" runat="server" Height="24px" ImageUrl="~/Image/632_img1.jpg" Width="24px" CommandName="DeleteCategory" />
+                                </td>
+                                <td class="search">
+                                    <asp:ImageButton ID="btnSua" runat="server" Height="24px" ImageUrl="~/Image/edit.jpg" Width="24px" CommandName="EditCategory" />
+                                </td>
+                                <td class="tdCarCategoryID">
+                                    <asp:Label ID="lblCarCategoryID" runat="server" Text='<%# Eval("CarCategoryID") %>' Width="24px" />
+                                </td>
+                                <td class="tdName">
+                                    <asp:Label ID="Name" runat="server" Text='<%# Eval("Name") %>' />
+                                </td>
+                                <td class="tdDescription">
+                                    <asp:Label ID="Description" runat="server" Text='<%# Eval("Description") %>' />
+                                </td>
+                                <td class="dtBy">
+                                    <asp:Label ID="CreatedBy" runat="server" Text='<%# Eval("CreatedBy") %>'  />
+                                </td>
+                                <td class="tdDTG">
+                                    <asp:Label ID="CreatedDTG" runat="server" Text='<%# Eval("CreatedDTG") %>' />
+                                </td>
+                                <td class="dtBy">
+                                    <asp:Label ID="UpdatedBy" runat="server" Text='<%# Eval("UpdatedBy") %>' />
+                                </td>
+                                <td class="tdDTG">
+                                    <asp:Label ID="UpdatedDTG" runat="server" Text='<%# Eval("UpdatedDTG") %>' />
+                                </td>
+                            </tr>
+                        </table>
+                    </ItemTemplate>
+                </asp:DataList>
+                    </div>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td colspan="4">
+                <div class="paging">
+                <cc1:CollectionPager ID="clPager" runat="server" BackText="«"
+FirstText="Đầu" LabelText="Trang:" LastText="Cuối" NextText="»"
+ResultsFormat="{0}-{1} (of {2})" BackNextDisplay="Buttons" BackNextLinkSeparator="" BackNextStyle="font-weight:bold;" PageNumbersDisplay="Numbers" PageNumbersSeparator="&amp;nbsp;" PageSize="5" ResultsLocation="Bottom" SectionPadding="10" ShowPageNumbers="True" UseSlider="False" BackNextLocation="Split" ShowLabel="False">
+</cc1:CollectionPager>
+                </div>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</asp:Content>

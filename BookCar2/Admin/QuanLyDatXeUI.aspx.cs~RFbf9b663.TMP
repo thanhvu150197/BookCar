@@ -1,0 +1,113 @@
+﻿using BookCar.SharedComponent.Param;
+using BookCar2.Shared;
+using BookCarBLL.Admin;
+using BookCarModels;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace BookCar2.Admin
+{
+    public partial class QuanLyDatXeUI : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                loadDataList();
+                loadListBooking();
+            }
+        }
+        protected void loadDataList()
+        {
+            AdminDefaultBLL AdBLL = new AdminDefaultBLL();
+            CarParam carParam = new CarParam();
+            List<ServiceOrder> ListSerVice = new List<ServiceOrder>();
+            AdBLL.DanhSachChoDuyet(carParam);
+            ListSerVice = carParam.ListServiceOrder;
+            DataTable dt = SharedFunc.ConvertToDataTable(ListSerVice);
+
+            clPager.MaxPages = 10;
+            clPager.PageSize = 5;
+            clPager.DataSource = dt.DefaultView;
+            clPager.BindToControl = DLListOrder;
+
+            DLListOrder.DataSource = clPager.DataSourcePaged;
+            DLListOrder.DataBind();
+        }
+        protected void loadListBooking()
+        {
+            AdminDefaultBLL AdBLL = new AdminDefaultBLL();
+            CarParam carParam = new CarParam();
+            List<ServiceOrder> ListSerVice = new List<ServiceOrder>();
+            AdBLL.DanhSachDangThue(carParam);
+            ListSerVice = carParam.ListServiceOrder;
+            DataTable dt = SharedFunc.ConvertToDataTable(ListSerVice);
+
+            clPagerBooked.MaxPages = 10;
+            clPagerBooked.PageSize = 5;
+            clPagerBooked.DataSource = dt.DefaultView;
+            clPagerBooked.BindToControl = DLListBooking;
+
+            DLListBooking.DataSource = clPagerBooked.DataSourcePaged;
+            DLListBooking.DataBind();
+        }
+        protected void DLListOrder_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            int i;
+            if (e.CommandName == "Confirm")
+            {
+                i = e.Item.ItemIndex;
+                AdminDefaultBLL AdBLL = new AdminDefaultBLL();
+                ServiceOrder Service = new ServiceOrder();
+                Label OrId= (Label)DLListOrder.Items[i].FindControl("lblOrderID");
+                Service.OrderID = int.Parse(OrId.Text);
+                Service.Status = 1;
+                AdBLL.UpdateService(Service);
+                loadDataList();
+                loadListBooking();
+            }
+            if (e.CommandName == "Cancle")
+            {
+                i = e.Item.ItemIndex;
+                AdminDefaultBLL AdBLL = new AdminDefaultBLL();
+                ServiceOrder Service = new ServiceOrder();
+                Label OrId = (Label)DLListOrder.Items[i].FindControl("lblOrderID");
+                Service.OrderID = int.Parse(OrId.Text);
+                Service.Status = 0;
+                Service.Deleted = 1;
+                AdBLL.UpdateService(Service);
+                loadDataList();
+            }
+        }
+
+        protected void DLListBooking_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            int i;
+            if (e.CommandName == "Cancle")
+            {
+                i = e.Item.ItemIndex;
+                AdminDefaultBLL AdBLL = new AdminDefaultBLL();
+                ServiceOrder Service = new ServiceOrder();
+                Label OrId = (Label)DLListBooking.Items[i].FindControl("lblOrderID");
+                Service.OrderID = int.Parse(OrId.Text);
+                Service.Status = 0;
+                AdBLL.UpdateService(Service);
+                loadDataList();
+                loadListBooking();
+            }
+            if (e.CommandName == "Confirm")
+            {
+                i = e.Item.ItemIndex;
+                AdminDefaultBLL AdBLL = new AdminDefaultBLL();
+                ServiceOrder Service = new ServiceOrder();
+                Label OrId = (Label)DLListBooking.Items[i].FindControl("lblOrderID");
+                Response.Redirect("UpdateServiceUI.aspx?OrderID="+ OrId.Text);
+            }
+        }
+    }
+}

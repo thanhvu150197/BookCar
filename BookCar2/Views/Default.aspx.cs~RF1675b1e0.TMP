@@ -1,0 +1,156 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using BookCar.SharedComponent.Param;
+using BookCarBLL;
+using BookCar.SharedComponent.Entities;
+using BookCarBLL.Admin;
+
+namespace BookCar2.Views
+{
+    public partial class Default : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+           
+            if (!Page.IsPostBack)
+            {
+
+                SetTimeStart();
+                Fill();
+                ddlCar.SelectedValue = "0";
+                DisplayCurrentPage(0);
+
+            }
+        }
+        protected void SetTimeStart()
+        {
+            dpTimeStart.SelectedDate = DateTime.Now;
+            dpTimeEnd.SelectedDate = DateTime.Now.AddDays(1);
+            tpStar.SelectedHour = 12;
+            tpStar.SelectedMinute = 00;
+            tpStar.SelectedSecond = 00;
+            tpEnd.SelectedHour = 12;
+            tpEnd.SelectedMinute = 00;
+            tpEnd.SelectedSecond = 00;
+        }
+        protected void btnDatXe_Click(object sender, EventArgs e)
+        {
+          
+            string CarIDs = "";
+            List<string> listcar = new List<string>();
+            //foreach (DataListItem item in DLListCar.Items)
+            //{
+            //    CheckBox chk = (CheckBox)item.FindControl("cbSelectCar");
+            //    Label id = (Label)item.FindControl("CarID");
+            //    if (chk.Checked == true)
+            //    {
+            //        CarIDs += id.Text + ",";
+            //    }
+            //}
+            if (String.IsNullOrEmpty(CarIDs))
+            {
+                // ScriptManager.RegisterStartupScript(this, this.GetType(), "Messagebox", "alert('Bạn chưa chọn xe');", true);
+
+            }
+          //else Response.Redirect("NhanDatXe.aspx?CarIDs="+ CarIDs + "&TimeS=" + TimeS + "&TimeE=" + TimeE);
+
+        }
+
+        protected void ddlCar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        protected void btnTimKiem_Click(object sender, EventArgs e)
+        {
+           
+        }
+        protected void Fill()
+        {
+            DefaultBLL defaultBLL = new DefaultBLL();
+            CarParam carParam = new CarParam();
+            //List loai xe
+            List<CarCategory> ListCarCategory = new List<CarCategory>();
+
+            defaultBLL.SearchAllCarCategory(carParam);
+            ListCarCategory = carParam.ListCarCategories;
+            ddlCar.DataSource = ListCarCategory;
+            ddlCar.DataBind();
+
+         
+        }
+
+        protected void dpTimeStart_SelectedDateChanged(object sender, EventArgs e)
+        {
+            
+        }
+        protected void DisplayCurrentPage(int PageIndex)
+        {
+            CarsBiz CarsBiz = new CarsBiz();
+            CarParam carParam = new CarParam();
+
+            Car enCar = new Car();
+
+            List<Car> ListCar = new List<Car>();
+            carParam.Pagesize = 5;
+            carParam.CurrentPageIndex = PageIndex;
+            carParam.Car = enCar;
+
+
+            CarsBiz.SearchListCar(carParam);
+            ListCar = carParam.ListCar;
+
+            grvCar.VirtualItemCount = carParam.TotalItem.Value;
+            grvCar.DataSource = ListCar;
+            grvCar.DataBind();
+
+        }
+
+        protected void grvCar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void grvCar_PageIndexChanged(object source, DataGridPageChangedEventArgs e)
+        {
+            grvCar.CurrentPageIndex = e.NewPageIndex;
+            DisplayCurrentPage(grvCar.CurrentPageIndex);
+        }
+
+        protected void grvCar_ItemCommand(object source, DataGridCommandEventArgs e)
+        {
+            int i = e.Item.ItemIndex;
+            int id = 0;
+            CarsBiz CarsBiz = new CarsBiz();
+            CarParam carParam = new CarParam();
+
+            string TimeS = Convert.ToDateTime(dpTimeStart.SelectedDate).ToShortDateString() + " " + tpStar.SelectedTime.ToString();
+            string TimeE = dpTimeEnd.SelectedDate.ToString() + " " + tpEnd.SelectedTime.ToString();
+
+            switch (((LinkButton)e.CommandSource).CommandName)
+            {
+
+                case "ViewCar":
+                    id = Convert.ToInt32(grvCar.DataKeys[i].ToString());
+                    Response.Redirect("~/Display.aspx?v=" + id);
+                    break;
+
+                case "Book":
+                    id = Convert.ToInt32(grvCar.DataKeys[i].ToString());
+                    Response.Redirect("NhanDatXe.aspx?CarID=" + id + "&TimeS=" + TimeS + "&TimeE=" + TimeE);
+                    break;
+                case "DeleteCar":
+                    // DeleteItem(e);
+                    break;
+                default:
+                    // Do nothing.
+                    break;
+
+            }
+        }
+    }
+}

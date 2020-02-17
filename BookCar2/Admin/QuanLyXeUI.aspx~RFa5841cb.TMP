@@ -1,0 +1,190 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="QuanLyXeUI.aspx.cs" Inherits="BookCar2.Admin.QuanLyXeUI" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style2 {
+            width: 15px;
+        }
+        .auto-style3 {
+            width: 63px;
+        }
+        .auto-style4 {
+            width: 100px;
+        }
+        .textBox{
+            border-radius:4px;
+        }
+        .auto-style5 {
+            width: 57px;
+        }
+        .btn-Search{
+            border-radius: 11px;
+        }
+        .auto-style6 {
+            text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <table class="auto-style1">
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">&nbsp;</td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">
+                <asp:Label ID="Label1" runat="server" Text="Mã xe"></asp:Label>
+            </td>
+            <td class="auto-style4" colspan="3">
+                <asp:TextBox ID="txtCarID" CssClass="textBox" runat="server" Width="100px" Height="23px" ></asp:TextBox>
+            </td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">
+                <asp:Label ID="Label4" runat="server" Text="Màu xe"></asp:Label>
+            </td>
+            <td colspan="2">
+                <asp:TextBox ID="txtColor" CssClass="textBox" runat="server" Width="100px" Height="23px"></asp:TextBox>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">
+                <asp:Label ID="Label3" runat="server" Text="Biển số"></asp:Label>
+            </td>
+            <td class="auto-style4" colspan="3">
+                <asp:TextBox ID="txtPlateNumber" CssClass="textBox" runat="server" Width="100px" Height="23px"></asp:TextBox>
+            </td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">
+                <asp:Label ID="Label5" runat="server" Text="Giá thuê"></asp:Label>
+            </td>
+            <td colspan="2">
+                <asp:TextBox ID="txtPrice" CssClass="textBox" runat="server" Width="100px" Height="23px"></asp:TextBox>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">&nbsp;</td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">
+                <asp:Button ID="Button1" runat="server" BackColor="#CCFF33" Font-Bold="True" ForeColor="Red" Text="Tìm Kiếm" CssClass="btn-Search" Height="38px" OnClick="Button1_Click" Width="107px" />
+            </td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">
+                <asp:Button ID="Button2" runat="server" BackColor="#CCFF33" Font-Bold="True" ForeColor="Red" Text="Thêm mới" CssClass="btn-Search" Height="38px" OnClick="Button1_Click" Width="107px" />
+            </td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">&nbsp;</td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2" style="width:10%" class="auto-style6">1</td>
+            <td style="width:10%" class="auto-style6">2</td>
+            <td colspan="2" style="width:15%" class="auto-style6">3</td>
+            <td colspan="2" style="width:20%" class="auto-style6">4</td>
+            <td style="width:10%"60 class="auto-style6">5</td>
+            <td colspan="2" class="auto-style6">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td colspan="12">
+                <asp:DataList ID="DLListCar" runat="server" Width="100%">
+                    <ItemTemplate>
+                        <table class="auto-style1" style="border-style: none none solid none; border-width: thin; background-color: #FF99FF;">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td style="width:10%">
+                                    <asp:Label ID="lblCarID" runat="server" Text='<%# Eval("CarID") %>' />                                
+                                </td>
+                                <td style="width:10%">
+                                    <asp:Label ID="lblCarCategoryID" runat="server" Text='<%# Eval("CategoryID") %>'  />
+                                </td>
+                                <td style="width:15%"><asp:Label ID="lblColor" runat="server" Text='<%# Eval("Color") %>' /></td>
+                                <td style="width:20%"><asp:Label ID="lblPlateNumber" runat="server" Text='<%# Eval("PlateNumber") %>'  /></td>
+                                <td style="width:60px"><asp:Label ID="lblPrice" runat="server" Text='<%# Eval("Price") %>'  /></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </ItemTemplate>
+                </asp:DataList>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">&nbsp;</td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">&nbsp;</td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">&nbsp;</td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">&nbsp;</td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="auto-style2">&nbsp;</td>
+            <td class="auto-style3" colspan="2">&nbsp;</td>
+            <td class="auto-style4" colspan="3">&nbsp;</td>
+            <td class="auto-style2" colspan="2">&nbsp;</td>
+            <td class="auto-style5" colspan="3">&nbsp;</td>
+            <td colspan="2">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</asp:Content>

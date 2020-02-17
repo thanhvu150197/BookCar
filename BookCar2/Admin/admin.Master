@@ -1,0 +1,64 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="admin.master.cs" Inherits="BookCar2.Admin.admin" %>
+<%@ Register Assembly="SMCUI" Namespace="SoftMart.Core.UIControls" TagPrefix="sm" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css' />
+    <link href="../css/AdminDefault.css" rel='stylesheet' type='text/css' />
+    <script type="text/javascript" src="../Scripts/jquery-3.4.1.min.js"></script>
+
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE 7]>
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome-ie7.min.css" rel="stylesheet" />
+	<![endif]-->
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+         <sm:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" />
+        <div>
+            <div class="top-link" style="height: 40px; background-color: black">
+                &nbsp;&nbsp;&nbsp;
+                <asp:LinkButton ID="LinkButton1" runat="server" Font-Size="Large" ForeColor="White" PostBackUrl="~/Views/Default.aspx">Cliend</asp:LinkButton>
+            </div>
+            <asp:Image ID="Image1" runat="server" Height="200px" ImageUrl="~/Image/Nissan_Banner-1.png" Width="100%" />
+            <div class="t-body">
+                <div class="menu-left" style="width: 19%; float: left">
+                    <div id="menu">
+                        <ul>
+                            <li>
+                                <asp:LinkButton ID="LinkButton2" runat="server" PostBackUrl="~/Admin/Categories/Default.aspx">CAR CATEGORY</asp:LinkButton></li>
+                            <li>
+                                <asp:LinkButton ID="LinkButton3" runat="server" PostBackUrl="~/Admin/Cars/Default.aspx">CAR</asp:LinkButton></li>
+                             <li>
+                                <asp:LinkButton ID="LinkButton5" runat="server" PostBackUrl="~/Admin/ServiceOrders/ServiceOrder.aspx">SERVICE ORDER</asp:LinkButton>          
+                            </li>              
+                            <li><a href="~/Views/Default.aspx">TRANG CLIEND</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content" style="width: 81%; float: right">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('ul.form li a').click(
+            function (e) {
+                e.preventDefault(); // prevent the default action
+                e.stopPropagation; // stop the click from bubbling
+                $(this).closest('ul').find('.selected').removeClass('selected');
+                $(this).parent().addClass('selected');
+            });
+    });
+</script>

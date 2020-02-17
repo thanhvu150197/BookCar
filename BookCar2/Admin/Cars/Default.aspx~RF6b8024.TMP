@@ -1,0 +1,157 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="BookCar2.Admin.Cars.Default" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .button {
+            transition-duration: 0.4s;
+        }
+
+            .button:hover {
+                background-color: darkblue; /* Green */
+                color: Red;
+            }
+        .auto-style2 {
+            width: 19%;
+        }
+        .auto-style3 {
+            text-align: right;
+        }
+        .auto-style4 {
+            width: 20%;
+            height: 22px;
+        }
+        .auto-style5 {
+            width: 19%;
+            height: 22px;
+        }
+        .auto-style6 {
+            transition-duration: 0.4s;
+            margin-left: 0px;
+        }
+        .auto-style7 {
+            width: 2%;
+            height: 22px;
+        }
+        .auto-style8 {
+            width: 2%;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <h1 style="color: darkseagreen">LIST CAR</h1>
+
+    <div class="DisplayList" style="padding-left: 2%; width: 100%">
+        <table class="" style="width:100%">
+            <tr>
+                <td class="auto-style4"></td>
+                <td class="auto-style5"></td>
+                <td class="auto-style7"></td>
+                <td class="auto-style4"></td>
+                <td class="auto-style4"></td>
+            </tr>
+            <tr>
+                <td class="auto-style3"><strong>
+                    <asp:Label ID="Color" runat="server" Text="Color"></asp:Label>
+                    </strong></td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="txtColor" runat="server" Height="23px"></asp:TextBox>
+                </td>
+                <td class="auto-style8">&nbsp;</td>
+                <td class="auto-style3">
+                    <asp:TextBox ID="txtPlateNumber" runat="server" Height="23px"></asp:TextBox>
+                </td>
+                <td><strong>
+                    <asp:Label ID="Color0" runat="server" Text="Plate Number"></asp:Label>
+                    </strong></td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style8">&nbsp;</td>
+                <td class="auto-style3">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3"><strong>
+                    <asp:Label ID="Label2" runat="server" Text="Min Price"></asp:Label>
+                    </strong></td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="txtMinPrice" runat="server" Height="23px"></asp:TextBox>
+                </td>
+                <td class="auto-style8">&nbsp;</td>
+                <td class="auto-style3">
+                <asp:DropDownList ID="ddlCategory" DataTextField="Name" DataValueField="CarCategoryID" runat="server" BackColor="#99FF66" CssClass="ddlCar" Font-Bold="True" Height="23px" Width="110px">
+                </asp:DropDownList>
+                </td>
+                <td><strong>
+                    <asp:Label ID="Color1" runat="server" Text="Category"></asp:Label>
+                    </strong></td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style8">&nbsp;</td>
+                <td class="auto-style3">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3"><strong>
+                    <asp:Label ID="Label3" runat="server" Text="Max Price"></asp:Label>
+                    </strong></td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="txtMaxPrice" runat="server" Height="23px"></asp:TextBox>
+                </td>
+                <td class="auto-style8">&nbsp;</td>
+                <td class="auto-style3">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style8">&nbsp;</td>
+                <td class="auto-style3">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style2">
+        <asp:Button ID="Search" runat="server" CssClass="auto-style6" Text="Search" BackColor="#99FF99" Font-Bold="True" Height="31px" Width="77px" PostBackUrl="~/Admin/Cars/AddNew.aspx" OnClick="Search_Click" />
+                </td>
+                <td class="auto-style8">&nbsp;</td>
+                <td class="auto-style3">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style8">&nbsp;</td>
+                <td class="auto-style3">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <asp:DataGrid runat="server" ID="GrVCar" CellPadding="4" ForeColor="#333333" GridLines="None" Width="96%" AllowPaging="True"
+            AllowCustomPaging="True" FirstPageText="<<" LastPageText=">>" OnPageIndexChanged="GrVCar_PageIndexChanged" PageSize="5" AutoGenerateColumns="False" DataKeyField="CarID" OnItemCommand="GrVCar_ItemCommand">
+            <AlternatingItemStyle BackColor="White" ForeColor="#284775" />
+            <Columns>
+                <asp:BoundColumn DataField="CarID" HeaderText="CarID"></asp:BoundColumn>
+                <asp:BoundColumn DataField="Color" HeaderText="Color"></asp:BoundColumn>
+                <asp:BoundColumn DataField="Price" HeaderText="Price"></asp:BoundColumn>
+                <asp:BoundColumn DataField="PlateNumber" HeaderText="PlateNumber"></asp:BoundColumn>
+                <asp:ButtonColumn CommandName="View" HeaderText="Detail" Text="View" Visible="False"></asp:ButtonColumn>
+                <asp:ButtonColumn CommandName="ViewCar" HeaderText="Detail" Text="View"></asp:ButtonColumn>
+
+                <asp:ButtonColumn CommandName="EditCar" HeaderText="Edit" Text="Edit"></asp:ButtonColumn>
+                <asp:ButtonColumn CommandName="DeleteCar" HeaderText="Delete" Text="Delete"></asp:ButtonColumn>
+            </Columns>
+            <EditItemStyle BackColor="#999999" />
+            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+            <ItemStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" />
+            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" BorderStyle="None" NextPageText="Next >" PrevPageText="< Previous" VerticalAlign="Middle" Font-Names="Century" Font-Size="Medium" Mode="NumericPages" />
+            <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        </asp:DataGrid>
+    </div>
+    <div class="btn" style="padding: 16px">
+        <asp:Button ID="btnAddCar" runat="server" CssClass="button" Text="Add New Car" BackColor="#CCFFFF" Font-Bold="True" Height="42px" Width="138px" PostBackUrl="~/Admin/Cars/AddNew.aspx" />
+    </div>
+</asp:Content>

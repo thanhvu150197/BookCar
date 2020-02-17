@@ -1,0 +1,85 @@
+﻿using BookCar.SharedComponent.Param;
+using BookCarBLL.Admin;
+using BookCarModels;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using BookCar2.Shared;
+
+namespace BookCar2.Admin
+{
+    public partial class QuanLyXeUI : System.Web.UI.Page
+    {
+     
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if(!Page.IsPostBack)
+            {
+                loadDataList();
+            }
+        }
+        protected void loadDataList()
+        {
+            AdminDefaultBLL AdBLL = new AdminDefaultBLL();
+            CarParam carParam = new CarParam();
+            List<Car> ListCar = new List<Car>();
+            AdBLL.DanhSachXe(carParam,txtCarID.Text,txtColor.Text,txtPlateNumber.Text,txtPrice.Text,"");
+            ListCar = carParam.ListCar;
+            DataTable dt = SharedFunc.ConvertToDataTable(ListCar);
+            //GrVCar.DataSource = ListCarC;
+            //GrVCar.DataBind();
+
+            clPager.MaxPages = 10;
+            clPager.PageSize = 5;
+            clPager.DataSource = dt.DefaultView;
+            clPager.BindToControl = DLListCar;
+            DLListCar.DataSource = clPager.DataSourcePaged;
+            DLListCar.DataBind();
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            loadDataList();
+        }
+        protected void btnInsert_Click(object sender, EventArgs e)
+        {
+            
+            Response.Redirect("ThemSuaXeUI.aspx?Value=");
+        }
+        protected void DLListCar_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            int i;
+            if (e.CommandName == "EditCar")
+            {       
+                i = e.Item.ItemIndex;
+                Label lb = (Label)DLListCar.Items[i].FindControl("lblCarID");
+                String Value = lb.Text;
+                Response.Redirect("ThemSuaXeUI.aspx?Value=" + Value);
+              
+            }
+            if (e.CommandName == "DeleteCar")
+            {
+                AdminDefaultBLL AdBLL = new AdminDefaultBLL();
+                CarParam carParam = new CarParam();
+                i = e.Item.ItemIndex;
+                Label lb = (Label)DLListCar.Items[i].FindControl("lblCarID");
+                Car CarX = new Car();
+                CarX.CarID = int.Parse(lb.Text);
+                AdBLL.XoaXeTheoId(CarX);
+                loadDataList();
+            }
+        }
+
+        protected void btnReset_Click(object sender, ImageClickEventArgs e)
+        {
+            txtColor.Text = "";
+            txtColor.Text = "";
+            txtPlateNumber.Text = "";
+            txtPrice.Text = "";
+        }
+    }
+}

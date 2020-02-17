@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3B1F0234-C79A-4A34-8325-DF118AC7B694}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BookCar.SharedComponent</RootNamespace>
+    <AssemblyName>BookCar.SharedComponent</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonFunc.cs" />
+    <Compile Include="Entities\Car.cs" />
+    <Compile Include="Entities\CarCategory.cs" />
+    <Compile Include="Entities\ServiceOrder.cs" />
+    <Compile Include="Entities\TimeCategory.cs" />
+    <Compile Include="Messenger.cs" />
+    <Compile Include="Param\CarParam.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SMCB">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCB.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCD, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCD.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCO">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCO.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCOC">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCOC.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCOO">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCOO.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCS">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCS.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCSM">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCSM.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCU, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCU.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCW">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCW.dll</HintPath>
+    </Reference>
+    <Reference Include="SMSN">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSN.dll</HintPath>
+    </Reference>
+    <Reference Include="SMSR">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSR.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
