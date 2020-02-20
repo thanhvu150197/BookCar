@@ -162,12 +162,18 @@
         </tr>
         <tr>
             <td class="auto-style9">&nbsp;</td>
-            <td class="auto-style8">&nbsp;</td>
+            <td class="auto-style8"><strong>
+                <asp:Label ID="Label14" runat="server" Text="Update By"></asp:Label>
+                </strong></td>
             <td class="auto-style4">
-                &nbsp;</td>
-            <td class="auto-style6">&nbsp;</td>
+                <asp:Label ID="lblUpBy" runat="server"></asp:Label>
+                </td>
+            <td class="auto-style6"><strong>
+                <asp:Label ID="Label15" runat="server" Text="Updated DTG"></asp:Label>
+                </strong></td>
             <td class="auto-style7">
-                &nbsp;</td>
+                <asp:Label ID="lblUpDTG" runat="server"></asp:Label>
+                </td>
             <td>&nbsp;</td>
         </tr>
         <tr>

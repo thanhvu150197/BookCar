@@ -1,5 +1,6 @@
 ﻿using BookCar.SharedComponent.Entities;
 using BookCar.SharedComponent.Param;
+using BookCar.SharedComponent.Constant;
 using BookCarBLL;
 using BookCarBLL.Admin;
 using System;
@@ -75,7 +76,6 @@ namespace BookCar2.Admin.Cars
                         int id = int.Parse(ltrCarID.Text);
                         Delete(id);
                         LoadData();
-
                         break;
                     }
                    
@@ -99,28 +99,24 @@ namespace BookCar2.Admin.Cars
 
         private void SetUpForm()
         {
-            DefaultBLL defaultBLL = new DefaultBLL();
-            CarParam carParam = new CarParam();
+            CarParam carParam = new CarParam(FunctionType.CarCategoryFunction.SearchCarCategoryNoPaging);
             List<CarCategory> ListCarCategory = new List<CarCategory>();
-            defaultBLL.SearchAllCarCategory(carParam);
+            CarCategory enCarCategory = new CarCategory();
+            carParam.CarCategory = enCarCategory;
+            MainController.Provider.Execute(carParam);
             ListCarCategory = carParam.ListCarCategories;
             ddlCategory.DataSource = ListCarCategory;
             ddlCategory.DataBind();
             grdData.PageSize = 5;
         }
-
         private void LoadData()
         {
-            CarParam param = new CarParam();
-            CarsBiz CarsBiz = new CarsBiz();
-
+            CarParam param = new CarParam(FunctionType.CarFunction.SearchCar);
             param.CurrentPageIndex = grdData.CurrentPageIndex;
             param.Pagesize = grdData.PageSize;
             param.Car = GetSearchFilter();
-
-            CarsBiz.SearchItems(param);
+            MainController.Provider.Execute(param);
             List<Car> lstItem = param.ListCar;
-
             grdData.VirtualItemCount = param.TotalItem.Value;
             grdData.DataSource = lstItem;
             grdData.DataBind();
@@ -134,23 +130,17 @@ namespace BookCar2.Admin.Cars
             enCar.PlateNumber = txtPlateNumber.Text;
             enCar.MinPrice = decimal.Parse("0");
             enCar.MaxPrice = 99999999999999999;
-
             return enCar;
         }
 
         private void Delete(int? id)
         {
-            AdminDefaultBLL AdBLL = new AdminDefaultBLL();
-            CarParam carParam = new CarParam();
-
+            CarParam carParam = new CarParam(FunctionType.CarFunction.DeleteCar);
             Car enCar = new Car();
             enCar.CarID = id;
-            AdBLL.XoaXeTheoId(enCar);
-
+            carParam.Car = enCar;
+            MainController.Provider.Execute(carParam);
         }
-
         #endregion
-
-      
     }
 }

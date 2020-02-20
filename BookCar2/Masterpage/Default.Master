@@ -18,14 +18,14 @@
         <asp:scriptmanager id="ScriptManager1" runat="server" ></asp:scriptmanager>
         <sm:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" />
         <div class="t-body">
-            <div class="top-link" style="height:40px;background-color:black">
+            <div class="top-link" style="height:40px;background-color:black;padding-top: 12px;">
                 &nbsp;&nbsp;&nbsp;
                 <asp:LinkButton ID="LinkButton1" runat="server" Font-Size="Large" ForeColor="White" PostBackUrl="~/Admin/Index.aspx">Trang quản trị</asp:LinkButton>
                 </div>
             <asp:Image ID="Image1" runat="server" Height="250px" ImageUrl="~/Image/car.jpg" Width="100%" />
             <div id="menu">
                  <ul>
-                     <li><a href="../Views/Default.aspx">Trang chủ</a></li>
+                     <li><a href="~\Views\Default.aspx" runat="server">Trang chủ</a></li>
                      <li><a href="#">Diễn đàn</a></li>
                      <li><a href="#">Tin tức</a></li>
                      <li><a href="#">Hỏi đáp</a></li>

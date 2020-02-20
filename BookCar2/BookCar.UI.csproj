@@ -219,8 +219,9 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Views\BookCar\Default.aspx" />
+    <Content Include="Views\BookCar\DisplayCar.aspx" />
     <Content Include="Views\Default.aspx" />
-    <Content Include="Views\NhanDatXe.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -401,19 +402,26 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Views\BookCar\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\BookCar\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BookCar\DisplayCar.aspx.cs">
+      <DependentUpon>DisplayCar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\BookCar\DisplayCar.aspx.designer.cs">
+      <DependentUpon>DisplayCar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NhanDatXe.aspx.cs">
-      <DependentUpon>NhanDatXe.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\NhanDatXe.aspx.designer.cs">
-      <DependentUpon>NhanDatXe.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -433,17 +441,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BookCar\BookCarModels\BookCarModels.csproj">
-      <Project>{58546b89-0fef-4fe6-bc53-f7714261f607}</Project>
-      <Name>BookCarModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BookCar.SharedComponent\BookCar.SharedComponent.csproj">
       <Project>{3b1f0234-c79a-4a34-8325-df118ac7b694}</Project>
       <Name>BookCar.SharedComponent</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BookCarBLL\BookCarBLL.csproj">
+    <ProjectReference Include="..\BookCar.Utils\BookCar.Utils.csproj">
+      <Project>{60752864-165f-416b-b9d4-008172f6df91}</Project>
+      <Name>BookCar.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookCarBLL\BookCar.Biz.csproj">
       <Project>{fb4f3ec7-4a70-4a27-a589-8c3a97b6e538}</Project>
-      <Name>BookCarBLL</Name>
+      <Name>BookCar.Biz</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

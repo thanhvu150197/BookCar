@@ -24,22 +24,22 @@ namespace BookCar2.Views
         protected global::System.Web.UI.WebControls.Label lblBookCar;
 
         /// <summary>
-        /// clCar control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SoftMart.Core.UIControls.ComparatorLabel clCar;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// clTime control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SoftMart.Core.UIControls.ComparatorLabel clTime;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
         /// ddlCar control.
@@ -103,6 +103,15 @@ namespace BookCar2.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnTimKiem;
+
+        /// <summary>
+        /// lblMess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMess;
 
         /// <summary>
         /// grvCar control.

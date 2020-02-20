@@ -11,10 +11,13 @@ C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMCSM.
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMCU.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMCW.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMSN.dll
-C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMSR.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMCUI.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMK.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\obj\Debug\BookCar.SharedComponent.csproj.CopyComplete
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\obj\Debug\BookCar.SharedComponent.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\obj\Debug\BookCar.SharedComponent.pdb
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\obj\Debug\BookCar.SharedComponent.csprojAssemblyReference.cache
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMCR.dll
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMSA.dll
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMSH.dll
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.SharedComponent\bin\Debug\SMSV.dll

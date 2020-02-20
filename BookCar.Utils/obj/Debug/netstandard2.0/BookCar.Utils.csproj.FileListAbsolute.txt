@@ -1,0 +1,8 @@
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.Utils\bin\Debug\netstandard2.0\BookCar.Utils.deps.json
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.Utils\bin\Debug\netstandard2.0\BookCar.Utils.dll
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.Utils\bin\Debug\netstandard2.0\BookCar.Utils.pdb
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.Utils\obj\Debug\netstandard2.0\BookCar.Utils.csprojAssemblyReference.cache
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.Utils\obj\Debug\netstandard2.0\BookCar.Utils.AssemblyInfoInputs.cache
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.Utils\obj\Debug\netstandard2.0\BookCar.Utils.AssemblyInfo.cs
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.Utils\obj\Debug\netstandard2.0\BookCar.Utils.dll
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar.Utils\obj\Debug\netstandard2.0\BookCar.Utils.pdb

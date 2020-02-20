@@ -1,5 +1,7 @@
-﻿using BookCar.SharedComponent.Entities;
+﻿using BookCar.SharedComponent.Constant;
+using BookCar.SharedComponent.Entities;
 using BookCar.SharedComponent.Param;
+using BookCarBLL;
 using BookCarBLL.Admin;
 using System;
 using System.Collections.Generic;
@@ -17,49 +19,55 @@ namespace BookCar2.Admin.ServiceOrders
         {
             if (!Page.IsPostBack)
             {
+                SetUpForm();
                 LoadData();
             }
         }
+        protected void btnCancle_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ServiceOrder.aspx?Stt=" + ServiceStatus.Booking);
+        }
         #endregion
         #region Private Methods
+        private void SetUpForm()
+        {
+
+        }
         private void LoadData()
         {
-            ServiceOrderBiz _bizServiceOrder = new ServiceOrderBiz();
-            CarParam carParam = new CarParam();
+            CarParam carParam = new CarParam(FunctionType.ServiceOrderFunction.SearchServiceOrder);
             ServiceOrder serviceOrder = new ServiceOrder();
             string id = Request.QueryString["id"].ToString();
-
 
             if (!string.IsNullOrEmpty(id))
             {
                 serviceOrder.OrderID = int.Parse(id);
                 serviceOrder.Status = 1;
                 carParam.ServiceOrder = serviceOrder;
-                _bizServiceOrder.SearchService(carParam);
-            }
-            serviceOrder = carParam.ServiceOrder;
+                MainController.Provider.Execute(carParam);
+                serviceOrder = carParam.ServiceOrder;
+            }     
+            BindObjectToForm(serviceOrder);
 
-            txtOrderID.Text = serviceOrder.OrderID.ToString();
-            txtCusName.Text = serviceOrder.CustomerName;
-            txtPSDTG.Text = serviceOrder.PlanStartDTG.ToString();
-            txtPEDTG.Text = serviceOrder.PlanEndDTG.ToString();
-            txtCarID.Text = serviceOrder.CarID.ToString();
-            lblCrBy.Text = serviceOrder.CreatedBy;
-            lblCrByDTG.Text = serviceOrder.CreatedDTG.ToString();
-            txtOD.Text = serviceOrder.OrderDuration.ToString();
-            if (serviceOrder.TimeCategory == 1)
+        }       
+        private void BindObjectToForm(ServiceOrder item)
+        {
+            txtOrderID.Text = item.OrderID.ToString();
+            txtCusName.Text = item.CustomerName;
+            txtPSDTG.Text = item.PlanStartDTG.ToString();
+            txtPEDTG.Text = item.PlanEndDTG.ToString();
+            txtCarID.Text = item.CarID.ToString();
+            lblCrBy.Text = item.CreatedBy;
+            lblCrByDTG.Text = item.CreatedDTG.ToString();
+            txtOD.Text = item.OrderDuration.ToString();
+            lblUpBy.Text = item.UpdatedBy;
+            lblUpDTG.Text = item.UpdatedDTG.ToString();
+            if (item.TimeCategory == 1)
             {
                 txtCT.Text = "Hours";
             }
             else txtCT.Text = "Days";
-
-        }
-        protected void btnCancle_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("ServiceOrder.aspx?Stt=" + "1");
         }
         #endregion
-
-
     }
 }

@@ -37,6 +37,11 @@
                         <asp:Button ID="btnView" runat="server" Text="Edit" CommandName="EditItems" />
                     </ItemTemplate>
                 </asp:TemplateColumn>
+               <asp:TemplateColumn  HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:Button ID="btnDeleted" runat="server" Text="Delete" CommandName="DeleteItems" />
+                    </ItemTemplate>
+                </asp:TemplateColumn>
           </Columns>
           <EditItemStyle HorizontalAlign="Center" />
           <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

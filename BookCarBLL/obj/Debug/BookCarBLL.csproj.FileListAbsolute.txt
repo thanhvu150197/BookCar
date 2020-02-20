@@ -3,7 +3,6 @@ C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCarBLL.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCarBLL.pdb
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCar.SharedComponent.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCarDAO.dll
-C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCarModels.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\SMCD.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\SMCO.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\SMCOC.dll
@@ -21,8 +20,6 @@ C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\SMCB.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\SMSN.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCarDAO.pdb
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCarDAO.dll.config
-C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCarModels.pdb
-C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCarModels.dll.config
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCar.SharedComponent.pdb
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\bin\Debug\BookCar.SharedComponent.dll.config
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCarBLL\obj\Debug\BookCarBLL.csprojAssemblyReference.cache

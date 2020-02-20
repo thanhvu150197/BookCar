@@ -36,7 +36,7 @@
                 <asp:Label ID="Label2" runat="server" Text="Plate Number"></asp:Label>
                 </strong></td>
             <td >
-                <asp:TextBox ID="txtPlateNumber" CssClass="textBox" runat="server" Width="110px" Height="23px" BackColor="#CCCCFF"></asp:TextBox>
+                <asp:TextBox ID="txtPlateNumber" CssClass="textBox" runat="server" Width="110px" Height="23px" BackColor="#CCCCFF" ReadOnly="True"></asp:TextBox>
             </td>
             <td >&nbsp;</td>
             <td ><strong>

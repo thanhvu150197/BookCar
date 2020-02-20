@@ -57,7 +57,6 @@ C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\AspNet.ScriptManager.bootst
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\AspNet.ScriptManager.jQuery.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCar.SharedComponent.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCarBLL.dll
-C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCarModels.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\CollectionPager.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\log4net.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\Microsoft.AspNet.FriendlyUrls.dll
@@ -80,8 +79,6 @@ C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\SMCD.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCarDAO.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\SMCU.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\SMK.dll
-C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCarModels.pdb
-C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCarModels.dll.config
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCar.SharedComponent.pdb
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCar.SharedComponent.dll.config
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCarBLL.pdb
@@ -102,3 +99,5 @@ C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCarDAO.dll.config
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\obj\Debug\BookCar.UI.csproj.CopyComplete
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\obj\Debug\BookCar2.dll
 C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\obj\Debug\BookCar2.pdb
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCar.Utils.dll
+C:\Users\Thanh Vu\source\repos\BookCar2\BookCar2\bin\BookCar.Utils.pdb

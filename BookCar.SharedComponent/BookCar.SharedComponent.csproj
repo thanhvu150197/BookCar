@@ -39,11 +39,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseParam.cs" />
+    <Compile Include="Constant\BusinessType.cs" />
     <Compile Include="CommonFunc.cs" />
+    <Compile Include="Constant\ServiceStatus.cs" />
     <Compile Include="Entities\Car.cs" />
     <Compile Include="Entities\CarCategory.cs" />
     <Compile Include="Entities\ServiceOrder.cs" />
     <Compile Include="Entities\TimeCategory.cs" />
+    <Compile Include="Constant\FunctionType.cs" />
     <Compile Include="Messenger.cs" />
     <Compile Include="Param\CarParam.cs" />
   </ItemGroup>
@@ -64,6 +68,9 @@
     <Reference Include="SMCOO">
       <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCOO.dll</HintPath>
     </Reference>
+    <Reference Include="SMCR">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCR.dll</HintPath>
+    </Reference>
     <Reference Include="SMCS">
       <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCS.dll</HintPath>
     </Reference>
@@ -74,17 +81,30 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCU.dll</HintPath>
     </Reference>
+    <Reference Include="SMCUI, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCUI.dll</HintPath>
+    </Reference>
     <Reference Include="SMCW">
       <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCW.dll</HintPath>
     </Reference>
-    <Reference Include="SMSN">
-      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSN.dll</HintPath>
+    <Reference Include="SMK, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMK.dll</HintPath>
     </Reference>
-    <Reference Include="SMSR">
-      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSR.dll</HintPath>
+    <Reference Include="SMSA">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSA.dll</HintPath>
+    </Reference>
+    <Reference Include="SMSH">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSH.dll</HintPath>
+    </Reference>
+    <Reference Include="SMSV">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSV.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

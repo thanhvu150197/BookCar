@@ -124,7 +124,7 @@
         <tr>
             <td>&nbsp;</td>
             <td colspan="2">
-                <asp:Button ID="btnUS" runat="server" BackColor="#FFFF99" Font-Bold="True" Height="32px"  Text="Add" Width="103px" OnClick="btnUS_Click" />
+                <asp:Button ID="btnUS" runat="server" BackColor="#FFFF99" Font-Bold="True" Height="32px"  Text="Add" Width="103px" OnClick="btnUS_Click1" />
             </td>
             <td >&nbsp;</td>
             <td colspan="2" >

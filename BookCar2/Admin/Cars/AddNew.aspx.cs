@@ -1,5 +1,6 @@
 ﻿using BookCar.SharedComponent;
 using BookCar.SharedComponent.Entities;
+using BookCar.SharedComponent.Constant;
 using BookCar.SharedComponent.Param;
 using BookCarBLL;
 using BookCarBLL.Admin;
@@ -10,6 +11,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace BookCar2.Admin.Cars
 {
     public partial class AddNew : System.Web.UI.Page
@@ -19,32 +21,16 @@ namespace BookCar2.Admin.Cars
         {
             if (!Page.IsPostBack)
             {
-                FillDropDown();
+                SetupForm();
+                LoadData();
             }
 
         }
-        private void btnUS_Click(object sender, EventArgs e)
+        protected void btnUS_Click1(object sender, EventArgs e)
         {
             try
             {
-
-                AdminDefaultBLL AdBLL = new AdminDefaultBLL();
-                Car InsCar = new Car();
-                InsCar.CategoryID = int.Parse(ddlCategory.SelectedValue.Trim());
-                InsCar.Color = txtColor.Text;
-
-                if (String.IsNullOrEmpty(txtPrice.Text))
-                {
-                    InsCar.Price = 0;
-                }
-                InsCar.Price = decimal.Parse(txtPrice.Text);
-                InsCar.PlateNumber = txtPlateNumber.Text;
-                InsCar.Description = txtDes.Text;
-                InsCar.CreatedBy = "Thanh";
-                InsCar.CreatedDTG = DateTime.Now;
-                InsCar.Version = 0;
-                InsCar.Deleted = 0;
-                AdBLL.ThemXe(InsCar);
+                AddNewItem();
                 lblMess.Text = Messenger.InsertCompleted;
                 ClearTextBoxes();
             }
@@ -54,19 +40,22 @@ namespace BookCar2.Admin.Cars
                 throw;
 
             }
-
         }
-
         #endregion
 
         #region Private Methods
-        private void FillDropDown()
+        private void SetupForm()
         {
-            DefaultBLL defaultBLL = new DefaultBLL();
-            CarParam carParam = new CarParam();
-            //List loai xe
+
+        }
+
+        private void LoadData()
+        {       
+            CarParam carParam = new CarParam(FunctionType.CarCategoryFunction.SearchCarCategoryNoPaging);
+            CarCategory enCarCategory = new CarCategory();
             List<CarCategory> ListCarCategory = new List<CarCategory>();
-            defaultBLL.SearchAllCarCategory(carParam);
+            carParam.CarCategory = enCarCategory;
+            MainController.Provider.Execute(carParam);
             ListCarCategory = carParam.ListCarCategories;
             ddlCategory.DataSource = ListCarCategory;
             ddlCategory.DataBind();
@@ -77,6 +66,25 @@ namespace BookCar2.Admin.Cars
             txtDes.Text = "";
             txtPlateNumber.Text = "";
             txtPrice.Text = "";
+        }
+        private Car GetObjectInForm()
+        {
+            Car item = new Car();
+            item.CategoryID = int.Parse(ddlCategory.SelectedValue.Trim()); ;
+            item.Price = decimal.Parse(txtPrice.Text);
+            item.Color = txtColor.Text;
+            item.PlateNumber = txtPlateNumber.Text;
+            item.Description = txtDes.Text;
+            item.CreatedBy = "Thanh";
+            item.CreatedDTG = DateTime.Now;
+            return item;
+        }
+        private void AddNewItem()
+        {
+            CarParam carParam = new CarParam(FunctionType.CarFunction.AddNewCar);
+            Car item = GetObjectInForm();
+            carParam.Car = item;
+            MainController.Provider.Execute(carParam);
         }
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="BookCar2.Admin.Cars.Default" %>
+<%@ Register Assembly="SMCUI" Namespace="SoftMart.Core.UIControls" TagPrefix="sm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -104,7 +105,7 @@
                     <asp:Label ID="Label2" runat="server" Text="Min Price"></asp:Label>
                     </strong></td>
                 <td class="auto-style2">
-                    <asp:TextBox ID="txtMinPrice" runat="server" Height="23px"></asp:TextBox>
+                    <sm:NumericTextBox ID="txtMinPrice" runat="server" Height="23px" AllowThousandDigit="True"></sm:NumericTextBox> 
                 </td>
                 <td class="auto-style8">&nbsp;</td>
                 <td class="auto-style3">
@@ -128,6 +129,7 @@
                     </strong></td>
                 <td class="auto-style2">
                     <asp:TextBox ID="txtMaxPrice" runat="server" Height="23px"></asp:TextBox>
+                    
                 </td>
                 <td class="auto-style8">&nbsp;</td>
                 <td class="auto-style3">&nbsp;</td>
@@ -188,7 +190,7 @@
                 </asp:TemplateColumn>
                  <asp:TemplateColumn  HeaderText="Delete">
                  <ItemTemplate>
-                        <asp:ImageButton ID="btnDelete" runat="server" CommandName="DeletedItems" ImageUrl="~/Image/632_img1.jpg" Height="30px" Width="30px"></asp:ImageButton>
+                        <asp:ImageButton ID="btnDelete" runat="server" CommandName="DeleteItems" ImageUrl="~/Image/632_img1.jpg" Height="30px" Width="30px"></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateColumn>
                 <asp:ButtonColumn CommandName="View" HeaderText="Detail" Text="View" Visible="False"></asp:ButtonColumn>

@@ -1,5 +1,6 @@
 ﻿using BookCar.SharedComponent.Entities;
 using BookCar.SharedComponent.Param;
+using BookCar.SharedComponent.Constant;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BookCarBLL.Admin;
+using BookCarBLL;
 
 namespace BookCar2.Admin.Categories
 {
@@ -55,7 +57,14 @@ namespace BookCar2.Admin.Categories
                         Response.Redirect("Display.aspx?id=" + id);
                         break;
                     }
-
+                case "DeleteItems":
+                    {
+                        Literal ltrCarCategoryID = (Literal)e.Item.FindControl("ltrCarCategoryID");
+                        int id = int.Parse(ltrCarCategoryID.Text);
+                        Delete(id);
+                        LoadData();
+                        break;
+                    }
                 default:
                     break;
             }
@@ -73,37 +82,31 @@ namespace BookCar2.Admin.Categories
         #endregion
         #region Private Methods
         private void SetUpForm()
-        {
-            CategoryBiz CartegoryBiz = new CategoryBiz();
-            CarParam carParam = new CarParam();
-            CarCategory enCarCategory = new CarCategory();
-            List<CarCategory> ListCategory = new List<CarCategory>();
-            carParam.Pagesize = 5;
-            carParam.CarCategory = enCarCategory;
-            CartegoryBiz.SearchListCategory(carParam);
-            ListCategory = carParam.ListCarCategories;
-            grvData.VirtualItemCount = carParam.TotalItem.Value;
-            grvData.DataSource = ListCategory;
-            grvData.DataBind();
+        {      
             grvData.PageSize = 5;
         }
         private void LoadData()
         {
-            CategoryBiz CartegoryBiz = new CategoryBiz();
-            CarParam carParam = new CarParam();
+            CarParam carParam = new CarParam(FunctionType.CarCategoryFunction.SearchCarCategory);
             CarCategory enCarCategory = new CarCategory();
             List<CarCategory> ListCategory = new List<CarCategory>();
             carParam.CurrentPageIndex = grvData.CurrentPageIndex;
             carParam.Pagesize = 5;
             carParam.CarCategory = enCarCategory;
-            CartegoryBiz.SearchListCategory(carParam);
+            MainController.Provider.Execute(carParam);
             ListCategory = carParam.ListCarCategories;
             grvData.VirtualItemCount = carParam.TotalItem.Value;
             grvData.DataSource = ListCategory;
             grvData.DataBind();
-            grvData.PageSize = 5;
         }
-
+        private void Delete(int? id)
+        {
+            CarParam carParam = new CarParam(FunctionType.CarCategoryFunction.DeleteCarCategory);
+            CarCategory enCarCategory = new CarCategory();
+            enCarCategory.CarCategoryID = id;
+            carParam.CarCategory = enCarCategory;
+            MainController.Provider.Execute(carParam);
+        }
         #endregion
 
     }

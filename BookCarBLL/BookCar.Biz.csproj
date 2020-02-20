@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FB4F3EC7-4A70-4A27-A589-8C3A97B6E538}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BookCarBLL</RootNamespace>
+    <AssemblyName>BookCarBLL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SMCD">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCD.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCO">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCO.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCOC">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCOC.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCOO">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCOO.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCR">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCR.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCU">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCU.dll</HintPath>
+    </Reference>
+    <Reference Include="SMCW">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMCW.dll</HintPath>
+    </Reference>
+    <Reference Include="SMK">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMK.dll</HintPath>
+    </Reference>
+    <Reference Include="SMSA">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSA.dll</HintPath>
+    </Reference>
+    <Reference Include="SMSB">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSB.dll</HintPath>
+    </Reference>
+    <Reference Include="SMSV">
+      <HintPath>..\..\..\..\Downloads\FlexCore_20200114_1630\FlexCore_20200114_1630\SMSV.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\AdminDefaultBLL.cs" />
+    <Compile Include="Admin\CarsBiz.cs" />
+    <Compile Include="Admin\CarCategoryBiz.cs" />
+    <Compile Include="Admin\ServiceOrderBiz.cs" />
+    <Compile Include="Admin\TimeCategoryBiz.cs" />
+    <Compile Include="MainController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BookCar\BookCarDAO\BookCar.Dao.csproj">
+      <Project>{68f049a9-304b-45c8-ae2e-9eaf7fc03787}</Project>
+      <Name>BookCar.Dao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookCar.SharedComponent\BookCar.SharedComponent.csproj">
+      <Project>{3b1f0234-c79a-4a34-8325-df118ac7b694}</Project>
+      <Name>BookCar.SharedComponent</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

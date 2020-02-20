@@ -5,7 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BookCar.SharedComponent;
+using BookCar.SharedComponent.Constant;
 using BookCar.SharedComponent.Entities;
+using BookCar.SharedComponent.Param;
+using BookCarBLL;
 using BookCarBLL.Admin;
 
 namespace BookCar2.Admin.Categories
@@ -23,16 +26,10 @@ namespace BookCar2.Admin.Categories
 
         protected void btnInsert_Click(object sender, EventArgs e)
         {
-            CategoryBiz _bizCategory = new CategoryBiz();
-            CarCategory enCategory = new CarCategory();
             try
             {
-                enCategory.Name = txtName.Text;
-                enCategory.Description = txtDes.Text;
-                enCategory.CreatedBy = "Thanh";
-                enCategory.CreatedDTG = DateTime.Now;
-                _bizCategory.InsertCategory(enCategory);
-                ClearText();
+                AddNewItem();
+                ClearTextBoxes();
                 lblMess.Text = Messenger.InsertCompleted;
             }
             catch (Exception ex)
@@ -49,10 +46,24 @@ namespace BookCar2.Admin.Categories
         {
 
         }
-        public void ClearText()
+        public void ClearTextBoxes()
         {
             txtName.Text = "";
             txtDes.Text = "";
+        }
+        private CarCategory GetObjectInForm()
+        {
+            CarCategory item = new CarCategory();
+            item.Name = txtName.Text;
+            item.Description = txtDes.Text;
+            return item;
+        }
+        private void AddNewItem()
+        {
+            CarParam param = new CarParam(FunctionType.CarCategoryFunction.AddNewCarCategory);
+            CarCategory carCategory = GetObjectInForm();
+            param.CarCategory = carCategory;
+            MainController.Provider.Execute(param);
         }
         #endregion
     }

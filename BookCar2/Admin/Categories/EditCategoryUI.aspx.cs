@@ -1,6 +1,8 @@
 ﻿using BookCar.SharedComponent;
+using BookCar.SharedComponent.Constant;
 using BookCar.SharedComponent.Entities;
 using BookCar.SharedComponent.Param;
+using BookCarBLL;
 using BookCarBLL.Admin;
 using System;
 using System.Collections.Generic;
@@ -20,65 +22,67 @@ namespace BookCar2.Admin.Categories
             if (!Page.IsPostBack)
             {
                 SetUpForm();
-                GetObjectInForm();
+                LoadData();
             }
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            CategoryBiz _bizCategory = new CategoryBiz();
-            CarCategory enCategory = new CarCategory();
-            string CategoryID = Request.QueryString["id"].ToString();
             try
             {
-                enCategory.CarCategoryID = int.Parse(CategoryID);
-                enCategory.Name = txtName.Text;
-                enCategory.Description = txtDes.Text;
-                enCategory.UpdatedBy = "Thanh";
-                enCategory.UpdatedDTG = DateTime.Now;
-                enCategory.Deleted = 0;
-                _bizCategory.UpdateCategory(enCategory);
-
-                lblMess.Text = Messenger.UpdateCompleted;
-                GetObjectInForm();
+                int? id = UpdateItem();
+                Response.Redirect("EditCategoryUI.aspx?id="+id+"&Mess="+Messenger.UpdateCompleted);
             }
             catch (Exception ex)
             {
-                lblMess.Text = Messenger.UpdateFailed;
-                throw;
+                throw ex;
             }
+
         }
         #endregion
         #region private method
         private void SetUpForm()
         {
-
+            lblMess.Text = Request.QueryString["Mess"];
         }
-        protected void GetObjectInForm()
+        private void LoadData()
         {
-
-            CategoryBiz categoryBiz = new CategoryBiz();
-            CarParam carParam = new CarParam();
-
-            CarCategory Category = new CarCategory();
-            string CategoryID = Request.QueryString["id"].ToString();
-            if (!string.IsNullOrEmpty(CategoryID))
-                Category.CarCategoryID = int.Parse(CategoryID);
-
-            carParam.CarCategory = Category;
-
-            categoryBiz.SearchListCategory(carParam);
-
-            Category = carParam.CarCategory;
-            txtName.Text = Category.Name;
-            txtDes.Text = Category.Description;
-            lblCreatedBy.Text = Category.CreatedBy;
-            lblCreatedDTG.Text = Category.CreatedDTG.ToString();
-            lblUpdatedBy.Text = Category.UpdatedBy;
-            lblUpdatedDTG.Text = Category.UpdatedDTG.ToString();
+            CarParam param = new CarParam(FunctionType.CarCategoryFunction.SearchCarCategory);
+            CarCategory carCategory = new CarCategory();
+            carCategory.CarCategoryID= int.Parse(Request.QueryString["id"].ToString());
+            param.CarCategory = carCategory;
+            MainController.Provider.Execute(param);
+            BindObjectToForm(param.CarCategory);
         }
+        private int? UpdateItem()
+        {
+            CarParam param = new CarParam(FunctionType.CarCategoryFunction.UpdateCarCategory);
+            CarCategory item = GetObjectInForm();
+            param.CarCategory = item;
+            MainController.Provider.Execute(param);
+            return item.CarCategoryID;
+        }
+
+        protected CarCategory GetObjectInForm()
+        {            
+            string CategoryID = Request.QueryString["id"];
+            CarCategory item = new CarCategory();
+            item.CarCategoryID = int.Parse(CategoryID);
+            item.Name = txtName.Text;
+            item.Description = txtDes.Text;
+            item.UpdatedBy = "Thanh";
+            item.UpdatedDTG = DateTime.Now;
+            return item;
+        }
+        private void BindObjectToForm(CarCategory item)
+        {
+            txtName.Text = item.Name;
+            txtDes.Text = item.Description;
+            lblCreatedBy.Text = item.CreatedBy;
+            lblCreatedDTG.Text = item.CreatedDTG.ToString();
+            lblUpdatedBy.Text = item.UpdatedBy;
+            lblUpdatedDTG.Text = item.UpdatedDTG.ToString();
+        }
+
         #endregion
-
-
-        
     }
 }

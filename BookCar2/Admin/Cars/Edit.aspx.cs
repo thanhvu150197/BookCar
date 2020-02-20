@@ -1,4 +1,5 @@
 ﻿using BookCar.SharedComponent;
+using BookCar.SharedComponent.Constant;
 using BookCar.SharedComponent.Entities;
 using BookCar.SharedComponent.Param;
 using BookCarBLL;
@@ -21,6 +22,7 @@ namespace BookCar2.Admin.Cars
 
             if (!Page.IsPostBack)
             {
+                SetUpForm();
                 LoadData();
             }
         }
@@ -29,28 +31,8 @@ namespace BookCar2.Admin.Cars
         {
             try
             {
-
-                CarsBiz carsBiz = new CarsBiz();
-                Car InsCar = new Car();
-                string CarID = Request.QueryString["id"].ToString();
-                InsCar.CarID = int.Parse(CarID);
-                InsCar.CategoryID = int.Parse(ddlCategory.SelectedValue.Trim());
-                InsCar.Color = txtColor.Text;
-
-                if (String.IsNullOrEmpty(txtPrice.Text))
-                {
-                    InsCar.Price = 0;
-                }
-                InsCar.Price = decimal.Parse(txtPrice.Text);
-                InsCar.PlateNumber = txtPlateNumber.Text;
-                InsCar.Description = txtDes.Text;
-                InsCar.UpdatedBy = "Thanh";
-                InsCar.UpdatedDTG = DateTime.Now;
-
-
-                carsBiz.UpdateCar(InsCar);
-                lblMess.Text = Messenger.UpdateCompleted;
-
+                int? id= UpdateItem();
+                Response.Redirect("~/Admin/Cars/Edit.aspx?id="+id+"&Mess=" + Messenger.UpdateCompleted);
             }
             catch (Exception ex)
             {
@@ -67,39 +49,33 @@ namespace BookCar2.Admin.Cars
         #endregion
 
         #region Private Methods
+        private void SetUpForm()
+        {
+            lblMess.Text = Request.QueryString["Mess"];
+        }
         protected void FillDropDown()
         {
-            DefaultBLL defaultBLL = new DefaultBLL();
-            CarParam carParam = new CarParam();
-            //List loai xe
+            CarParam carParam = new CarParam(FunctionType.CarCategoryFunction.SearchCarCategoryNoPaging);
             List<CarCategory> ListCarCategory = new List<CarCategory>();
-            defaultBLL.SearchAllCarCategory(carParam);
+            CarCategory enCarCategory = new CarCategory();
+            carParam.CarCategory = enCarCategory;
+            MainController.Provider.Execute(carParam);
             ListCarCategory = carParam.ListCarCategories;
             ddlCategory.DataSource = ListCarCategory;
             ddlCategory.DataBind();
         }
         protected void LoadData()
         {
-            CarsBiz CarsBiz = new CarsBiz();
-            CarParam carParam = new CarParam();
+            CarParam carParam = new CarParam(FunctionType.CarFunction.SearchCar);
             List<Car> ListCar = new List<Car>();
             Car enCar = new Car();
-            string CarID = Request.QueryString["id"].ToString();
-            enCar.CarID = int.Parse(CarID);
-            enCar.Color = "";
+            string CarID = Request.QueryString["id"];
+            if(!string.IsNullOrEmpty(CarID))
+                 enCar.CarID = int.Parse(CarID);
             carParam.Car = enCar;
-            CarsBiz.SearchItems(carParam);
+            MainController.Provider.Execute(carParam);
             enCar = carParam.Car;
-            //Fill TextBox
-            txtColor.Text = enCar.Color;
-            txtDes.Text = enCar.Description;
-            txtPlateNumber.Text = enCar.PlateNumber;
-            txtPrice.Text = enCar.Price.ToString();
-            lblCrBy.Text = enCar.CreatedBy;
-            lblCrDTG.Text = enCar.CreatedBy;
-            lblUpBy.Text = enCar.UpdatedBy;
-            lblUpDTG.Text = enCar.UpdatedDTG.ToString();
-
+            BindObjectToForm(enCar);
             FillDropDown();
 
         }
@@ -110,10 +86,42 @@ namespace BookCar2.Admin.Cars
             txtPlateNumber.Text = "";
             txtPrice.Text = "";
         }
+        private void BindObjectToForm(Car item)
+        {
+            txtColor.Text = item.Color;
+            txtDes.Text = item.Description;
+            txtPlateNumber.Text = item.PlateNumber;
+            txtPrice.Text = item.Price.ToString();
+            lblCrBy.Text = item.CreatedBy;
+            lblCrDTG.Text = item.CreatedBy;
+            lblUpBy.Text = item.UpdatedBy;
+            lblUpDTG.Text = item.UpdatedDTG.ToString();
+        }
+        private Car GetObjectInForm()
+        {
+            Car enCar = new Car();
+            string CarID = Request.QueryString["id"].ToString();
+            enCar.CarID = int.Parse(CarID);
+            enCar.CategoryID = int.Parse(ddlCategory.SelectedValue.Trim());
+            enCar.Color = txtColor.Text;
+            if (String.IsNullOrEmpty(txtPrice.Text))
+            {
+                enCar.Price = 0;
+            }
+            enCar.Price = decimal.Parse(txtPrice.Text);
+            enCar.PlateNumber = txtPlateNumber.Text;
+            enCar.Description = txtDes.Text;
+
+            return enCar;
+        }
+        private int? UpdateItem()
+        {
+            CarParam param = new CarParam(FunctionType.CarFunction.UpdateCar);
+            Car enCar = GetObjectInForm();
+            param.Car = enCar;
+            MainController.Provider.Execute(param);
+            return enCar.CarID;
+        }
         #endregion
-
-
-
-
     }
 }

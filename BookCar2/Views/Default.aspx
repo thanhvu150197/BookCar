@@ -57,11 +57,6 @@
         }
         .auto-style22 {
             text-align: left;
-            width: 181px;
-            height: 54px;
-        }
-        .auto-style23 {
-            width: 368px;
             height: 54px;
         }
         .auto-style24 {
@@ -136,9 +131,11 @@
     </tr>
     <tr>
         <td class="auto-style38">&nbsp;</td>
-        <td class="auto-style12"><strong><sm:ComparatorLabel ID="clCar" runat="server" Font-Size="Large">Loại Xe</sm:ComparatorLabel>
+        <td class="auto-style12"><strong>
+            <asp:Label ID="Label1" runat="server" Text="Loại Xe"></asp:Label>
             </strong></td>
-        <td class="auto-style9" colspan="2"><strong><sm:ComparatorLabel ID="clTime" runat="server">Thời gian đặt</sm:ComparatorLabel>
+        <td class="auto-style9" colspan="2"><strong>
+            <asp:Label ID="Label2" runat="server" Text="Thời gian đặt"></asp:Label>
             </strong></td>
         <td class="auto-style8" colspan="3">&nbsp;</td>
     </tr>
@@ -147,17 +144,17 @@
             &nbsp;</td>
         <td class="auto-style12">
             <asp:DropDownList ID="ddlCar" runat="server"
-                DataTextField="Name" DataValueField="CarCategoryID" Width="120px" OnSelectedIndexChanged="ddlCar_SelectedIndexChanged" CausesValidation="True" BackColor="#99CCFF" Font-Bold="True" Height="23px">
+                DataTextField="Name" DataValueField="CarCategoryID" Width="120px" CausesValidation="True" BackColor="#99CCFF" Font-Bold="True" Height="23px">
             </asp:DropDownList>
         </td>
         <td class="auto-style41">
-            <sm:DatePicker ID="dpTimeStart" runat="server" CssClass="selector" OnSelectedDateChanged="dpTimeStart_SelectedDateChanged" />
+            <sm:DatePicker ID="dpTimeStart" runat="server" CssClass="selector" />
             </td>
         <td class="auto-style39">
             <asp:Image ID="Image2" runat="server" Height="30px" ImageUrl="~/Image/thiet-ke-logo-mau-sac-dep-mat13.jpg" Width="55px" />
         </td>
         <td class="auto-style33">
-                <sm:DatePicker ID="dpTimeEnd" runat="server" CssClass="selector" OnSelectedDateChanged="dpTimeStart_SelectedDateChanged" />
+                <sm:DatePicker ID="dpTimeEnd" runat="server" CssClass="selector" />
         </td>
         <td class="auto-style14">
             &nbsp;</td>
@@ -198,23 +195,45 @@
     <tr>
         <td class="auto-style21">
         </td>
-        <td class="auto-style22" style="border-style: solid none none none">
+        <td class="auto-style22" style="border-style: solid none none none" colspan="3">
+            <asp:Label ID="lblMess" runat="server" Font-Bold="False" Font-Italic="True" ForeColor="Red"></asp:Label>
         </td>
-        <td class="auto-style23" colspan="2" style="border-style: solid none none none"></td>
         <td class="auto-style24" colspan="3" style="border-style: solid none none none"></td>
     </tr>
     <tr>
         <td class="auto-style37">
             &nbsp;</td>
         <td colspan="6">
-            <asp:DataGrid ID="grvCar" runat="server" AllowCustomPaging="True" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" PageSize="5" Width="96%" DataKeyField="CarID" OnItemCommand="grvCar_ItemCommand" OnPageIndexChanged="grvCar_PageIndexChanged" OnSelectedIndexChanged="grvCar_SelectedIndexChanged">
+            <asp:DataGrid ID="grvCar" runat="server" AllowCustomPaging="True" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" PageSize="5" Width="96%" DataKeyField="CarID" OnItemCommand="grvCar_ItemCommand" OnPageIndexChanged="grvCar_PageIndexChanged" OnItemDataBound="grvCar_ItemDataBound">
                 <AlternatingItemStyle BackColor="White" />
                 <Columns>
-                    <asp:ButtonColumn ButtonType="LinkButton" CommandName="ViewCar" HeaderText="CarID" DataTextField="CarID"></asp:ButtonColumn>
-                    <asp:BoundColumn DataField="Color" HeaderText="Color"></asp:BoundColumn>
-                    <asp:BoundColumn DataField="PlateNumber" HeaderText="PlateNumber"></asp:BoundColumn>
-                    <asp:BoundColumn DataField="Price" HeaderText="Price"></asp:BoundColumn>
-                    <asp:ButtonColumn ButtonType="LinkButton" CommandName="Book" HeaderText="Book" Text="Book"></asp:ButtonColumn>
+                    <asp:TemplateColumn  HeaderText="CarID" Visible="False">
+                    <ItemTemplate>
+                        <asp:Literal ID="ltrCarID" runat="server" Visible="False"></asp:Literal>
+                    </ItemTemplate>
+                </asp:TemplateColumn>
+                 <asp:TemplateColumn  HeaderText="Color">
+                    <ItemTemplate>
+                        <asp:Literal ID="ltrColor" runat="server"></asp:Literal>
+                    </ItemTemplate>
+                </asp:TemplateColumn>
+                 <asp:TemplateColumn  HeaderText="Price">
+                    <ItemTemplate>
+                        <asp:Literal ID="ltrPrice" runat="server"></asp:Literal>
+                    </ItemTemplate>
+                </asp:TemplateColumn>
+                 <asp:TemplateColumn  HeaderText="PlateNumber">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="ltrPlateNumber" runat="server" CommandName="ViewItems"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateColumn>
+                <asp:TemplateColumn  HeaderText="Book">
+                 <ItemTemplate>
+                        <asp:Button ID="btnBook" runat="server" Text="Book Now" CommandName="Book" Height="30px" Width="80px"></asp:Button>
+                    </ItemTemplate>
+                </asp:TemplateColumn>
+                
+                <asp:ButtonColumn CommandName="View" HeaderText="Book" Text="Book" Visible="False"></asp:ButtonColumn>
                 </Columns>
                 <EditItemStyle BackColor="#7C6F57" />
                 <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />

@@ -1,4 +1,5 @@
-﻿using BookCar.SharedComponent.Entities;
+﻿using BookCar.SharedComponent.Constant;
+using BookCar.SharedComponent.Entities;
 using BookCar.SharedComponent.Param;
 using BookCarBLL;
 using BookCarBLL.Admin;
@@ -10,7 +11,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace BookCar2.Admin.ServiceOrders
-{    
+{
     public partial class ListRequire : System.Web.UI.Page
     {
 
@@ -19,7 +20,7 @@ namespace BookCar2.Admin.ServiceOrders
         {
             if (!Page.IsPostBack)
             {
-                SetUpForm();                
+                SetUpForm();
                 LoadData();
             }
         }
@@ -37,49 +38,31 @@ namespace BookCar2.Admin.ServiceOrders
                     {
                         LinkButton lbCarID = (LinkButton)e.Item.FindControl("lbCarID");
                         int id = int.Parse(lbCarID.Text);
-                        switch (ddlStatus.SelectedValue)
-                        {
-                            case "0":
-                                {
-                                    Response.Redirect("~/Admin/Cars/Display.aspx?id=" + id+"&Fr=SO&Stt=0");
-                                }
-                                break;
-                            case "1":
-                                {
-                                    Response.Redirect("~/Admin/Cars/Display.aspx?id=" + id + "&Fr=SO&Stt=1");
-                                }
-                                break;
-                            case "2":
-                                {
-                                    Response.Redirect("~/Admin/Cars/Display.aspx?id=" + id + "&Fr=SO&Stt=2");
-                                }
-                                break;
-                        }
-                        
+                        Response.Redirect("~/Admin/Cars/Display.aspx?id=" + id + "&Fr=SO&Stt="+ddlStatus.SelectedValue);
                         break;
                     }
                 case "ViewOrder":
                     {
                         Literal ltrOrderID = (Literal)e.Item.FindControl("ltrOrderID");
                         int id = int.Parse(ltrOrderID.Text);
-                        switch(ddlStatus.SelectedValue)
+                        switch (ddlStatus.SelectedValue)
                         {
-                            case "0":
+                            case ServiceStatus.Require:
                                 {
                                     Response.Redirect("DisplayRequire.aspx?id=" + id);
                                 }
                                 break;
-                            case "1":
+                            case ServiceStatus.Booking:
                                 {
                                     Response.Redirect("DisplayBooking.aspx?id=" + id);
                                 }
                                 break;
-                            case "2":
+                            case ServiceStatus.Completed:
                                 {
                                     Response.Redirect("DisplayCompleted.aspx?id=" + id);
                                 }
                                 break;
-                        }                      
+                        }
                         break;
                     }
                 case "Confirm":
@@ -88,18 +71,18 @@ namespace BookCar2.Admin.ServiceOrders
                         int id = int.Parse(ltrOrderID.Text);
                         switch (ddlStatus.SelectedValue)
                         {
-                            case "0":
+                            case ServiceStatus.Require:
                                 {
-                                    ConfirmOrders(id);
+                                    ConfirmToBooking(id);
                                     LoadData();
                                 }
                                 break;
-                            case "1":
+                            case ServiceStatus.Booking:
                                 {
                                     Response.Redirect("ConfirmOrders.aspx?id=" + id);
                                 }
                                 break;
-                            case "2":
+                            case ServiceStatus.Completed:
                                 {
                                     Response.Redirect("EditOrder.aspx?id=" + id);
                                 }
@@ -113,19 +96,19 @@ namespace BookCar2.Admin.ServiceOrders
                         int id = int.Parse(ltrOrderID.Text);
                         switch (ddlStatus.SelectedValue)
                         {
-                            case "0":
+                            case ServiceStatus.Require:
                                 {
                                     CancleRequire(id);
                                     LoadData();
                                 }
                                 break;
-                            case "1":
+                            case ServiceStatus.Booking:
                                 {
                                     CancleBooking(id);
                                     LoadData();
                                 }
                                 break;
-                            case "2":
+                            case ServiceStatus.Completed:
                                 {
                                     Response.Redirect("EditOrder.aspx?id=" + id);
                                 }
@@ -133,10 +116,15 @@ namespace BookCar2.Admin.ServiceOrders
                         }
                         break;
                     }
-                    break;
+
                 default:
                     break;
             }
+        }
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvListRequire.CurrentPageIndex = 0;
+            LoadData();
         }
         protected void grvListRequire_ItemDataBound(object sender, DataGridItemEventArgs e)
         {
@@ -173,15 +161,15 @@ namespace BookCar2.Admin.ServiceOrders
         #region Page Evens
         private void SetUpForm()
         {
-            CarParam carParam = new CarParam();
-            ServiceOrderBiz ServiceBiz = new ServiceOrderBiz();
+            //Fill DataGrid
+            CarParam carParam = new CarParam(FunctionType.ServiceOrderFunction.SearchServiceOrder);
             ServiceOrder enServiceOrder = new ServiceOrder();
             List<ServiceOrder> ListService = new List<ServiceOrder>();
+
             carParam.Pagesize = 5;
             carParam.CurrentPageIndex = grvListRequire.CurrentPageIndex;
-
             carParam.ServiceOrder = enServiceOrder;
-            ServiceBiz.SearchService(carParam);
+            MainController.Provider.Execute(carParam);
             ListService = carParam.ListServiceOrder;
 
             grvListRequire.VirtualItemCount = carParam.TotalItem.Value;
@@ -189,9 +177,9 @@ namespace BookCar2.Admin.ServiceOrders
             grvListRequire.DataBind();
 
             //Fill dropdown
-            ddlStatus.Items.Add(new ListItem("Requires", "0"));
-            ddlStatus.Items.Add(new ListItem("Booking", "1"));
-            ddlStatus.Items.Add(new ListItem("Completed", "2"));
+            ddlStatus.Items.Add(new ListItem("Requires", ServiceStatus.Require));
+            ddlStatus.Items.Add(new ListItem("Booking", ServiceStatus.Booking));
+            ddlStatus.Items.Add(new ListItem("Completed", ServiceStatus.Completed));
 
             string Status = Request.QueryString["Stt"];
             if (!string.IsNullOrEmpty(Status))
@@ -200,74 +188,63 @@ namespace BookCar2.Admin.ServiceOrders
         }
         protected void DisplayCurrentPage(int PageIndex, CarParam carParam)
         {
-            ServiceOrderBiz ServiceBiz = new ServiceOrderBiz();
+            
             ServiceOrder enServiceOrder = new ServiceOrder();
             List<ServiceOrder> ListService = new List<ServiceOrder>();
             carParam.Pagesize = 5;
             carParam.CurrentPageIndex = grvListRequire.CurrentPageIndex;
 
             carParam.ServiceOrder = enServiceOrder;
-            ServiceBiz.SearchService(carParam);
             ListService = carParam.ListServiceOrder;
 
             grvListRequire.VirtualItemCount = carParam.TotalItem.Value;
             grvListRequire.DataSource = ListService;
             grvListRequire.DataBind();
         }
-        protected void ConfirmOrders(int id)
+        private void ConfirmToBooking(int id)
         {
-            ServiceOrderBiz serviceOrderBiz = new ServiceOrderBiz();
+            CarParam param = new CarParam(FunctionType.ServiceOrderFunction.UpdateServiceOrder);
             ServiceOrder enServiceOrder = new ServiceOrder();
-            enServiceOrder.OrderID = id;      
+            enServiceOrder.OrderID = id;
             enServiceOrder.Status = 1;
             enServiceOrder.UpdatedDTG = DateTime.Now;
-            serviceOrderBiz.UpdateService(enServiceOrder);
+            param.ServiceOrder = enServiceOrder;
+            MainController.Provider.Execute(param);
         }
         private void CancleRequire(int id)
         {
-            ServiceOrderBiz serviceOrderBiz = new ServiceOrderBiz();
+            CarParam param = new CarParam(FunctionType.ServiceOrderFunction.DeleteServiceOrder);
             ServiceOrder enServiceOrder = new ServiceOrder();
             enServiceOrder.OrderID = id;
-            enServiceOrder.Deleted = 1;
             enServiceOrder.UpdatedDTG = DateTime.Now;
-            serviceOrderBiz.UpdateService(enServiceOrder);
+            param.ServiceOrder = enServiceOrder;
+            MainController.Provider.Execute(param);
         }
         private void CancleBooking(int id)
         {
-            ServiceOrderBiz serviceOrderBiz = new ServiceOrderBiz();
+            CarParam param = new CarParam(FunctionType.ServiceOrderFunction.UpdateServiceOrder);
             ServiceOrder enServiceOrder = new ServiceOrder();
             enServiceOrder.OrderID = id;
             enServiceOrder.Status = 0;
-            enServiceOrder.UpdatedDTG = DateTime.Now;
-            serviceOrderBiz.UpdateService(enServiceOrder);
+            param.ServiceOrder = enServiceOrder;
+            MainController.Provider.Execute(param);
         }
-            protected void LoadData()
+        protected void LoadData()
         {
-            
-            ServiceOrderBiz ServiceBiz = new ServiceOrderBiz();
+            CarParam carParam = new CarParam(FunctionType.ServiceOrderFunction.SearchServiceOrder);
             List<ServiceOrder> ListService = new List<ServiceOrder>();
-
             ServiceOrder enServiceOrder = new ServiceOrder();
-            enServiceOrder.Status =int.Parse(ddlStatus.SelectedValue);
-
-            CarParam carParam = new CarParam();
+            enServiceOrder.Status = int.Parse(ddlStatus.SelectedValue);    
             carParam.Pagesize = 5;
             carParam.CurrentPageIndex = grvListRequire.CurrentPageIndex;
             carParam.ServiceOrder = enServiceOrder;
-
-            ServiceBiz.SearchService(carParam);
+            MainController.Provider.Execute(carParam);
             ListService = carParam.ListServiceOrder;
 
             grvListRequire.VirtualItemCount = carParam.TotalItem.Value;
             grvListRequire.DataSource = ListService;
             grvListRequire.DataBind();
-        }
-        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadData();
-        }
+        }      
         #endregion
-
-
     }
 }
